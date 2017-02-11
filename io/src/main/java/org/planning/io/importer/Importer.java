@@ -6,4 +6,9 @@ package org.planning.io.importer;
  */
 public interface Importer {
     void doImport();
+
+    public interface ImportMode {
+        public static final String RESOURCES = "resources";
+        public static final String FILE = "file";
+    }
 }
