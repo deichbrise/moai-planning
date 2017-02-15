@@ -77,17 +77,35 @@ public class ChocoExampleTest extends AbstractCoreTest {
 
         }
 
+        // No Two Lecture at the same time and room TODO is false
+        for(int i = 0; i < numberOfLectures; i++) {
+            for(int j = 0; j < numberOfLectures; j++) {
+                if(i != j) {
+                    model.and(
+                            vars[i][0].ne( vars[j][0] ).decompose(),
+                            vars[i][1].ne( vars[j][1] ).decompose(),
+                            vars[i][2].ne( vars[j][2] ).decompose(),
+                            vars[i][3].ne( vars[j][3] ).decompose()
+                    );
+
+                }
+            }
+        }
+
 
         Solution solution = model.getSolver().findSolution();
 
         final String[] map = new String[]{"Day: ", "Room: ", "Instructor: ", "Slot: "};
         if ( solution != null ) {
             for(int i = 0; i < numberOfLectures; i++) {
-                System.out.print( "Lecture "+ (i + 1) + ": ( " );
+                System.out.print( "Lecture "+ (i + 1) + ", " );
                 for(int j = 0; j < 4; j++) {
-                    System.out.print( map[j] + Integer.toString( vars[i][j].getValue() ) + " ");
+                    System.out.print( map[j] + Integer.toString( vars[i][j].getValue() ));
+                    if(j < 3) {
+                        System.out.print( ", " );
+                    }
                 }
-                System.out.println( " )" );
+                System.out.println( "" );
             }
         }
     }
