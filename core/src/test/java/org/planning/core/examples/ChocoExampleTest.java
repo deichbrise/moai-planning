@@ -38,18 +38,18 @@ public class ChocoExampleTest extends AbstractCoreTest {
         IntVar[][] vars = new IntVar[numberOfLectures][4];
 
         for ( int i = 0; i < numberOfLectures; i++ ) {
-            vars[i][0] = model.intVar( "lecture_" + i + "_day", 0, 4 );
+            vars[i][0] = model.intVar( "lecture_" + i + "_instructor", 0, 4 );
             vars[i][1] = model.intVar( "lecture_" + i + "_room", 0, 4 );
-            vars[i][2] = model.intVar( "lecture_" + i + "_instructor", 0, 4 );
+            vars[i][2] = model.intVar( "lecture_" + i + "_day", 0, 4 );
             vars[i][3] = model.intVar( "lecture_" + i + "_slot", 0, 2 );
         }
 
         // Lecture - Instructor Constraints
         for ( int i = 0; i < 5; i++ ) {
-            model.member( vars[i][2], new int[]{0, 1} ).post();
-            model.member( vars[i + 5][2], new int[]{2, 3} ).post();
-            model.member( vars[i + 10][2], new int[]{1, 4} ).post();
-            model.member( vars[i + 15][2], new int[]{2, 4} ).post();
+            model.member( vars[i][0], new int[]{0, 1} ).post();
+            model.member( vars[i + 5][0], new int[]{2, 3} ).post();
+            model.member( vars[i + 10][0], new int[]{1, 4} ).post();
+            model.member( vars[i + 15][0], new int[]{2, 4} ).post();
         }
 
         // Lecture - Room Constraints
@@ -61,19 +61,23 @@ public class ChocoExampleTest extends AbstractCoreTest {
 
         for ( int i = 0; i < numberOfLectures; i++ ) {
 
-            // Room - Time Constraints
-            model.ifThen( vars[i][1].eq( 0 ).decompose(), vars[i][0].eq( 0 ).decompose());
-            model.ifThen( vars[i][1].eq( 1 ).decompose(), model.member( vars[i][0], new int[]{0, 1, 2, 3}));
-            model.ifThen( vars[i][1].eq( 2 ).decompose(), model.member( vars[i][0], new int[]{1, 2, 3, 4}));
+            // Room - Day Constraints
+            model.ifThen( vars[i][1].eq( 0 ).decompose(), vars[i][2].eq( 0 ).decompose());
+            model.ifThen( vars[i][1].eq( 1 ).decompose(), model.member( vars[i][2], new int[]{0, 1, 2, 3}));
+            model.ifThen( vars[i][1].eq( 2 ).decompose(), model.member( vars[i][2], new int[]{1, 2, 3, 4}));
+
+            // Room - TimeSlot Constraints
             model.ifThen( vars[i][1].eq( 3 ).decompose(), vars[i][3].eq( 0 ).decompose());
             model.ifThen( vars[i][1].eq( 4 ).decompose(), vars[i][3].eq( 2 ).decompose());
 
-            // Instructor - Time Constraints
-            model.ifThen( vars[i][2].eq( 0 ).decompose(), model.member( vars[i][0], new int[]{1, 2, 3} ) );
-            model.ifThen( vars[i][2].eq( 1 ).decompose(), model.member( vars[i][0], new int[]{0, 1, 2} ) );
-            model.ifThen( vars[i][2].eq( 2 ).decompose(), model.member( vars[i][0], new int[]{3, 4} ) );
-            model.ifThen( vars[i][2].eq( 3 ).decompose(), model.member( vars[i][3], new int[]{1, 2} ));
-            model.ifThen( vars[i][2].eq( 4 ).decompose(), model.member( vars[i][3], new int[]{0, 1} ));
+            // Instructor - Day Constraints
+            model.ifThen( vars[i][0].eq( 0 ).decompose(), model.member( vars[i][2], new int[]{1, 2, 3} ) );
+            model.ifThen( vars[i][0].eq( 1 ).decompose(), model.member( vars[i][2], new int[]{0, 1, 2} ) );
+            model.ifThen( vars[i][0].eq( 2 ).decompose(), model.member( vars[i][2], new int[]{3, 4} ) );
+
+            // Instructor - TimeSlot Constraints
+            model.ifThen( vars[i][0].eq( 3 ).decompose(), model.member( vars[i][3], new int[]{1, 2} ));
+            model.ifThen( vars[i][0].eq( 4 ).decompose(), model.member( vars[i][3], new int[]{0, 1} ));
 
         }
 
@@ -94,7 +98,7 @@ public class ChocoExampleTest extends AbstractCoreTest {
 
         Solution solution = model.getSolver().findSolution();
 
-        final String[] map = new String[]{"Day: ", "Room: ", "Instructor: ", "Slot: "};
+        final String[] map = new String[]{"Instructor: ", "Room: ", "Day: ", "Slot: "};
         if ( solution != null ) {
             for(int i = 0; i < numberOfLectures; i++) {
                 System.out.print( "Lecture "+ (i + 1) + ", " );
