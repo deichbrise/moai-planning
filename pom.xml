@@ -16,7 +16,7 @@
 
     <modules>
         <module>persistence</module>
-        <module>core</module>
+        <module>solver</module>
         <module>rest</module>
         <module>util</module>
         <module>io</module>

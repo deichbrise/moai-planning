@@ -1,4 +1,4 @@
-package org.planning.core.model;
+package org.planning.solver.model;
 
 /**
  * @author pascalstammer

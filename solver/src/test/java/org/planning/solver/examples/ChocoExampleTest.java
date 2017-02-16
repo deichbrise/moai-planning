@@ -1,4 +1,4 @@
-package org.planning.core.examples;
+package org.planning.solver.examples;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -6,7 +6,7 @@ import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
 import org.junit.Test;
-import org.planning.core.test.AbstractCoreTest;
+import org.planning.solver.test.AbstractCoreTest;
 
 /**
  * @author pascalstammer

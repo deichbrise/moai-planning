@@ -1,4 +1,4 @@
-package org.planning.core.service;
+package org.planning.solver.service;
 
 import org.planning.persistence.model.conceptual.Concept;
 import org.planning.persistence.model.conceptual.ConceptProperty;
