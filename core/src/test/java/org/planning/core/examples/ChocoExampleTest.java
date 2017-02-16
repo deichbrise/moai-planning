@@ -46,16 +46,16 @@ public class ChocoExampleTest extends AbstractCoreTest {
 
         // Lecture - Instructor Constraints
         for ( int i = 0; i < 5; i++ ) {
-            model.member( vars[i][2], new int[]{0, 1} );
-            model.member( vars[i + 5][2], new int[]{2, 3} );
-            model.member( vars[i + 10][2], new int[]{1, 4} );
-            model.member( vars[i + 15][2], new int[]{2, 4} );
+            model.member( vars[i][2], new int[]{0, 1} ).post();
+            model.member( vars[i + 5][2], new int[]{2, 3} ).post();
+            model.member( vars[i + 10][2], new int[]{1, 4} ).post();
+            model.member( vars[i + 15][2], new int[]{2, 4} ).post();
         }
 
         // Lecture - Room Constraints
         for ( int i = 0; i < 10; i++ ) {
-            model.member( vars[i][1], new int[]{0, 1, 3} );
-            model.member( vars[i + 10][1], new int[]{0, 2, 4} );
+            model.member( vars[i][1], new int[]{0, 1, 3} ).post();
+            model.member( vars[i + 10][1], new int[]{0, 2, 4} ).post();
         }
 
 
@@ -81,13 +81,12 @@ public class ChocoExampleTest extends AbstractCoreTest {
         for(int i = 0; i < numberOfLectures; i++) {
             for(int j = 0; j < numberOfLectures; j++) {
                 if(i != j) {
-                    model.and(
-                            vars[i][0].ne( vars[j][0] ).decompose(),
-                            vars[i][1].ne( vars[j][1] ).decompose(),
-                            vars[i][2].ne( vars[j][2] ).decompose(),
-                            vars[i][3].ne( vars[j][3] ).decompose()
-                    );
-
+                    model.not(model.and(
+                            vars[i][0].eq( vars[j][0] ).decompose(),
+                            vars[i][1].eq( vars[j][1] ).decompose(),
+                            vars[i][2].eq( vars[j][2] ).decompose(),
+                            vars[i][3].eq( vars[j][3] ).decompose()
+                    )).post();
                 }
             }
         }
