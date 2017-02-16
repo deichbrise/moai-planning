@@ -2,24 +2,11 @@ package org.planning.core.examples;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.chocosolver.sat.SatFactory;
-import org.chocosolver.solver.ICause;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
-import org.chocosolver.solver.constraints.Propagator;
-import org.chocosolver.solver.constraints.nary.cnf.LogOp;
-import org.chocosolver.solver.exception.ContradictionException;
-import org.chocosolver.solver.search.strategy.Search;
-import org.chocosolver.solver.search.strategy.decision.IntDecision;
-import org.chocosolver.solver.search.strategy.decision.RealDecision;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.util.ESat;
-import org.chocosolver.util.objects.setDataStructures.iterable.IntIterableBitSet;
-import org.chocosolver.util.objects.setDataStructures.iterable.IntIterableSet;
 import org.junit.Test;
 import org.planning.core.test.AbstractCoreTest;
-
-import java.util.List;
 
 /**
  * @author pascalstammer
@@ -95,6 +82,19 @@ public class ChocoExampleTest extends AbstractCoreTest {
             }
         }
 
+
+        final IntVar[] instructorVars = new IntVar[numberOfLectures];
+        for(int i = 0; i < numberOfLectures; i++) {
+            instructorVars[i] = vars[i][0];
+        }
+
+        IntVar limit = model.intVar("limit", 0, 5);
+        for( int lecture = 0; lecture < numberOfLectures; lecture++) {
+            for( int instructor = 0; instructor < 5; instructor++) {
+                model.count( instructor, instructorVars, limit ).post();
+            }
+
+        }
 
         Solution solution = model.getSolver().findSolution();
 
