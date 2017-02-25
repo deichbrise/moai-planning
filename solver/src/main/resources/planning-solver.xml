@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="domainEntityMappingService" class="org.planning.solver.service.impl.DomainEntityMappingServiceImpl" />
+
+    <bean id="abstractConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.AbstractConstraintDescriptor" abstract="true">
+        <property name="domainEntityMappingService" ref="domainEntityMappingService" />
+    </bean>
+
+    <bean id="binaryConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.BinaryConstraintDescriptor" parent="abstractConstraintDescriptor" />
+    <bean id="limitConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.LimitConstraintDescriptor" parent="abstractConstraintDescriptor" />
+    <bean id="uniqueConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.UniqueConstraintDescriptor" parent="abstractConstraintDescriptor" />
+
+    <util:list id="constraintDescriptors">
+        <ref bean="binaryConstraintDescriptor" />
+        <ref bean="limitConstraintDescriptor" />
+        <ref bean="uniqueConstraintDescriptor" />
+    </util:list>
+
+    <bean id="domainDescriptor" class="org.planning.solver.descriptor.domain.impl.DomainDescriptorImpl">
+        <property name="domainEntityMappingService" ref="domainEntityMappingService" />
+    </bean>
+    <bean id="cspModelFactory" class="org.planning.solver.factory.impl.CspModelFactoryImpl">
+        <property name="constraintDescriptorFactory" ref="constraintDescriptorFactory" />
+        <property name="domainDescriptor" ref="domainDescriptor" />
+    </bean>
+    <bean id="constraintDescriptorFactory" class="org.planning.solver.factory.impl.ConstraintDescriptorFactoryImpl" init-method="init">
+        <property name="constraintDescriptors" ref="constraintDescriptors" />
+    </bean>
+</beans>

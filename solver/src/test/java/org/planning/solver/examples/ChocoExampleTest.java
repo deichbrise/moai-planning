@@ -4,15 +4,16 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
+import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.variables.IntVar;
 import org.junit.Test;
-import org.planning.solver.test.AbstractCoreTest;
+import org.planning.solver.test.AbstractSolverTest;
 
 /**
  * @author pascalstammer
  * @version 31.01.17.
  */
-public class ChocoExampleTest extends AbstractCoreTest {
+public class ChocoExampleTest extends AbstractSolverTest {
 
     private static final Logger log = LogManager.getLogger( ChocoExampleTest.class );
 
@@ -73,10 +74,12 @@ public class ChocoExampleTest extends AbstractCoreTest {
             for(int j = 0; j < numberOfLectures; j++) {
                 if(i != j) {
                     model.not(model.and(
-                            vars[i][0].eq( vars[j][0] ).decompose(),
-                            vars[i][1].eq( vars[j][1] ).decompose(),
-                            vars[i][2].eq( vars[j][2] ).decompose(),
-                            vars[i][3].eq( vars[j][3] ).decompose()
+                            new Constraint[]{
+                                    vars[i][0].eq( vars[j][0] ).decompose(),
+                                    vars[i][1].eq( vars[j][1] ).decompose(),
+                                    vars[i][2].eq( vars[j][2] ).decompose(),
+                                    vars[i][3].eq( vars[j][3] ).decompose()
+                            }
                     )).post();
                 }
             }
@@ -95,6 +98,7 @@ public class ChocoExampleTest extends AbstractCoreTest {
             }
 
         }
+
 
         Solution solution = model.getSolver().findSolution();
 

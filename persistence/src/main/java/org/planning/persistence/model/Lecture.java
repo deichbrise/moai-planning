@@ -4,7 +4,7 @@ package org.planning.persistence.model;
  * @author pascalstammer
  * @version 16.02.17.
  */
-public class Lecture {
+public class Lecture extends AbstractModel implements DomainModel {
     private String name;
 
     private Instructor instructor;
