@@ -14,15 +14,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.planning</groupId>
+            <groupId>${parent.groupId}</groupId>
             <artifactId>persistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.choco-solver</groupId>
             <artifactId>choco-solver</artifactId>
-            <version>4.0.2</version>
+            <version>${choco.version}</version>
         </dependency>
 
     </dependencies>

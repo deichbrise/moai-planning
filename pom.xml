@@ -20,9 +20,19 @@
         <module>rest</module>
         <module>util</module>
         <module>io</module>
+        <module>shell</module>
     </modules>
 
     <packaging>pom</packaging>
+
+    <properties>
+        <spring.shell.version>1.2.0.M1</spring.shell.version>
+        <choco.version>4.0.2</choco.version>
+        <junit.version>4.12</junit.version>
+        <spring.test.version>4.2.3.RELEASE</spring.test.version>
+        <spring.data.version>4.2.0.RELEASE</spring.data.version>
+        <spring.data.db>spring-data-neo4j</spring.data.db>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -32,12 +42,12 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.2.3.RELEASE</version>
+            <version>${spring.test.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
