@@ -7,6 +7,10 @@ implemented a framework for this specific domain. The next step will be the remo
 domain by a more generic domain. Then we load our domain by an XML description that will be replaced by a configurable domain via
 user interface. (not implemented yet)
 
+# Authors
+
+Christopher Broecker (chbroecker), Franziska Becker (frabecker), Pascal Stammer (pstammer)
+
 ## Project Structure
 
 ### IO
@@ -27,10 +31,36 @@ Core functionality that does the planning job
 ### Util
 Utility and Helper Functions
 
+## Shell Execution
+
+Simply execute
+
+    java -jar sbin/shell.jar
+
+Than you can execute
+
+    solve $pathToFile
+
+You will find a example file under ./example/example1.xml .
+
+You can execute the example by executing
+
+    solve classpath:/domain/example1.xml
+
+in the shell.
+
 ## Developer Info
 Make sure you have installed Maven. You can build the project with
 
     mvn clean install
+
+Then execute
+
+    java -jar shell/target/shell-1.0-SNAPSHOT.jar
+
+After the shell was loaded you can execute
+
+    solve {pathTo ./example/example1.xml}
 
 ## Architecture
 

@@ -13,7 +13,7 @@ public class SolverCommandsImpl extends AbstractCommands implements SolverComman
 
     private PlanningController planningController;
 
-    @CliCommand(value = "validate", help = "validate the domain description")
+    @CliCommand(value = "solve", help = "validate the domain description")
     public void importAndRun(@CliOption(key = {"", "file"}) String file) {
         getPlanningController().loadDomainAndExecuteSolver(file);
     }
