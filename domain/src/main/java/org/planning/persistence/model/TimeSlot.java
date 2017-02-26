@@ -12,6 +12,11 @@ public class TimeSlot extends AbstractModel implements DomainModel {
 
     private Time end;
 
+    @Override
+    public String getName() {
+        return start.toString() + "-" + end.toString();
+    }
+
     public void setInterval(final Time start, final Time end) {
         this.start = start;
         this.end = end;

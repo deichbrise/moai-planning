@@ -6,4 +6,5 @@ package org.planning.persistence.model;
  */
 public interface DomainModel {
     String getGuid();
+    String getName();
 }

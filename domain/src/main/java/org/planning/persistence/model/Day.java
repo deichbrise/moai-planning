@@ -10,6 +10,11 @@ public class Day extends AbstractModel implements DomainModel {
 
     private DayOfWeek day;
 
+    @Override
+    public String getName() {
+        return day.toString();
+    }
+
     public DayOfWeek getDay() {
         return day;
     }

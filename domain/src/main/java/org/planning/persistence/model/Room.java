@@ -6,13 +6,13 @@ package org.planning.persistence.model;
  */
 public class Room extends AbstractModel implements DomainModel {
 
-    private Integer room;
+    private String name;
 
-    public Integer getRoom() {
-        return room;
+    public String getName() {
+        return name;
     }
 
-    public void setRoom( final Integer room ) {
-        this.room = room;
+    public void setName(String name) {
+        this.name = name;
     }
 }
