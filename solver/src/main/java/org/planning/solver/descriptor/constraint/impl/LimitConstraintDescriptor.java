@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * We are limiting the number of entity occurrences. Example:
+ *
+ * No instructor can give more than 5 lectures
+ *
  * @author pascalstammer
  */
 public class LimitConstraintDescriptor extends AbstractConstraintDescriptor implements ConstraintDescriptor {
@@ -27,15 +31,18 @@ public class LimitConstraintDescriptor extends AbstractConstraintDescriptor impl
     protected void doPost(Model model, Constraint constraint, CspSolvingContext context) {
         final LimitConstraint limitConstraint = (LimitConstraint)constraint;
 
+        // Collect all model vars of the entity type
         final List<IntVar> allModelConstraints = new ArrayList<>();
         for(final DomainModel aggregateRootEntitiy : context.getAggregateRootEntities()) {
             allModelConstraints.add(context.getDomain().get(aggregateRootEntitiy.getGuid(), limitConstraint.getModelClass()));
         }
         final IntVar[] allModellVars = (IntVar[]) allModelConstraints.toArray();
 
+        // Specify the count domain
         IntVar limit = model.intVar(limitConstraint.getModelClass().getSimpleName() + "_limit", 0, limitConstraint.getLimit());
         final int[] domain = buildDomain(getDomainModelOfClass(context, limitConstraint.getModelClass()));
 
+        // Configure the constraint
         for( final int domainEntityId : domain ) {
             model.count( domainEntityId, allModellVars, limit ).post();
         }

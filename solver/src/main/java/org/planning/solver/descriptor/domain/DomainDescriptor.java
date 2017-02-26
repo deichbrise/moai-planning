@@ -9,6 +9,7 @@ import org.planning.util.annotation.Since;
 import java.util.List;
 
 /**
+ * Implementations of this interface constructing the underlying domain on which successor steps are operating
  * @author Pascal Stammer
  */
 @Since("1.0.0")

@@ -9,5 +9,11 @@ import org.planning.solver.descriptor.constraint.ConstraintDescriptor;
  * @author pascalstammer
  */
 public interface ConstraintDescriptorFactory {
+
+    /**
+     * Get the ConstraintDescriptor for the given constraintType
+     * @param constraint the constraint
+     * @return the mathcing constraint descriptor
+     */
     public ConstraintDescriptor getInstance(final Constraint constraint);
 }

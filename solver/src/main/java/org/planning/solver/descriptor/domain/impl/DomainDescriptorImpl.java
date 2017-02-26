@@ -34,6 +34,8 @@ public class DomainDescriptorImpl implements DomainDescriptor {
     protected Domain initializeVariables(Model model, List<DomainModel> aggregateRootEntities, List<DomainModel> relatedEntities) {
         final Map<Class<? extends DomainModel>, List<DomainModel>> relatedEntityIndex = initRelatedEntityIndex(relatedEntities);
         final Domain domain = new Domain();
+
+        // Each property of the aggregate root entities get its own IntVar
         for(int i = 0; i < aggregateRootEntities.size(); i++) {
             final DomainModel aggregateRootEntity = aggregateRootEntities.get(i);
             initializeVariablesForAggregateRootEntity(model, aggregateRootEntity, relatedEntityIndex, domain);

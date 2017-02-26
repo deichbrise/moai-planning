@@ -10,5 +10,10 @@ import org.planning.solver.model.CspSolvingContext;
  */
 public interface CspModelFactory {
 
+    /**
+     * Create Model
+     * @param context the csp solving context
+     * @return the initialized model
+     */
     public Model createModel(final CspSolvingContext context);
 }
