@@ -56,10 +56,51 @@
     <reduce-to of="Instructor 4" to="10-12, 12-14" />
     <reduce-to of="Instructor 5" to="8-10, 10-12" />
 
-    <!--
-            <limit of="Instructor" to="5" />
 
-            -->
+    <reduce-to of="Lecture 1" to="Instructor 1, Instructor 2" />
+    <reduce-to of="Lecture 2" to="Instructor 1, Instructor 2" />
+    <reduce-to of="Lecture 3" to="Instructor 1, Instructor 2" />
+    <reduce-to of="Lecture 4" to="Instructor 1, Instructor 2" />
+    <reduce-to of="Lecture 5" to="Instructor 1, Instructor 2" />
+    <reduce-to of="Lecture 6" to="Instructor 3, Instructor 4" />
+    <reduce-to of="Lecture 7" to="Instructor 3, Instructor 4" />
+    <reduce-to of="Lecture 8" to="Instructor 3, Instructor 4" />
+    <reduce-to of="Lecture 9" to="Instructor 3, Instructor 4" />
+    <reduce-to of="Lecture 10" to="Instructor 3, Instructor 4" />
+    <reduce-to of="Lecture 11" to="Instructor 2, Instructor 5" />
+    <reduce-to of="Lecture 12" to="Instructor 2, Instructor 5" />
+    <reduce-to of="Lecture 13" to="Instructor 2, Instructor 5" />
+    <reduce-to of="Lecture 14" to="Instructor 2, Instructor 5" />
+    <reduce-to of="Lecture 15" to="Instructor 2, Instructor 5" />
+    <reduce-to of="Lecture 16" to="Instructor 3, Instructor 5" />
+    <reduce-to of="Lecture 17" to="Instructor 3, Instructor 5" />
+    <reduce-to of="Lecture 18" to="Instructor 3, Instructor 5" />
+    <reduce-to of="Lecture 19" to="Instructor 3, Instructor 5" />
+    <reduce-to of="Lecture 20" to="Instructor 3, Instructor 5" />
+
+    <reduce-to of="Lecture 1" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 2" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 3" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 4" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 5" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 6" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 7" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 8" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 9" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 10" to="Room 1, Room 2, Room 4" />
+    <reduce-to of="Lecture 11" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 12" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 13" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 14" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 15" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 16" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 17" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 18" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 19" to="Room 1, Room 3, Room 5" />
+    <reduce-to of="Lecture 20" to="Room 1, Room 3, Room 5" />
+
+
+    <limit of="Instructor" to="5" />
 
     <unique of="Lecture" by="Day, Room, TimeSlot, Instructor" />
 </domain>

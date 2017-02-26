@@ -8,6 +8,8 @@ import org.planning.domain.model.constraint.Constraint;
 import org.planning.solver.descriptor.constraint.ConstraintDescriptor;
 import org.planning.solver.model.CspSolvingContext;
 
+import java.util.Set;
+
 
 /**
  * Constraints between one entity and at least one other entity. Example:
@@ -41,17 +43,18 @@ public class BinaryConstraintDescriptor extends AbstractConstraintDescriptor imp
 
     protected void postAggregateRootRelatedEntityConstraint(final Model model, final BinaryConstraint constraint, CspSolvingContext context) {
         final String identifier = constraint.getModel().getGuid();
-        final Class<? extends DomainModel> relatedClass = getRelatedEntityClass(context);
+        final Class<? extends DomainModel> relatedClass = getRelatedEntityClass(constraint.getSupportedRelations());
         final IntVar var = context.getDomain().get(identifier, relatedClass);
 
         // Here we can reduce the possible values to specific ones
-        model.member(var, buildDomain(constraint.getSupportedRelations())).post();
+        final int[] domain = buildDomain(constraint.getSupportedRelations());
+        model.member(var, domain).post();
     }
 
     protected void postNonAggregateRootRelatedEntityConstraint(final Model model, final BinaryConstraint constraint, CspSolvingContext context) {
         for(final DomainModel aggregateRootEntity : context.getAggregateRootEntities()) {
             final IntVar var1 = context.getDomain().get(aggregateRootEntity.getGuid(), constraint.getModel().getClass());
-            final IntVar var2 = context.getDomain().get(aggregateRootEntity.getGuid(), getRelatedEntityClass(context));
+            final IntVar var2 = context.getDomain().get(aggregateRootEntity.getGuid(), getRelatedEntityClass(constraint.getSupportedRelations()));
 
             // Here we have to use a if then constraint. Example: If Room 1 than only at timeslots 1 and 4
             model.ifThen(var1.eq(getDomainEntityMappingService().get(constraint.getModel())).decompose(), model.member(var2, buildDomain(constraint.getSupportedRelations())));
@@ -62,5 +65,8 @@ public class BinaryConstraintDescriptor extends AbstractConstraintDescriptor imp
         return context.getRelatedEntities().iterator().next().getClass();
     }
 
+    private Class<? extends DomainModel> getRelatedEntityClass( final Set<? extends DomainModel> models) {
+        return models.iterator().next().getClass();
+    }
 
 }
