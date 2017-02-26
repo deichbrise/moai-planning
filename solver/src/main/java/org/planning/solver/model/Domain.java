@@ -1,7 +1,7 @@
 package org.planning.solver.model;
 
 import org.chocosolver.solver.variables.IntVar;
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +13,11 @@ public class Domain {
     private Map<String, Entry> entryMap = new HashMap<>();
 
     public void put(final String guid, final Class<? extends DomainModel> domainModelClass, final IntVar intVar) {
-        final Entry entry = new Entry();
-        entry.put(domainModelClass, intVar);
-        entryMap.put(guid, entry);
+        if(!entryMap.containsKey( guid )) {
+            final Entry entry = new Entry();
+            entryMap.put(guid, entry);
+        }
+        entryMap.get( guid ).put(domainModelClass, intVar);
     }
 
     public IntVar get(final String guid, final Class<? extends DomainModel> domainModelClass) {

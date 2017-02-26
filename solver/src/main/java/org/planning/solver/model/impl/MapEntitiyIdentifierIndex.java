@@ -1,6 +1,6 @@
 package org.planning.solver.model.impl;
 
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 import org.planning.solver.model.EntityIdentifierIndex;
 import org.planning.util.exception.PlanningRuntimeException;
 

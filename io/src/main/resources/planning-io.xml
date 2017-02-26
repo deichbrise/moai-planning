@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dayOfWeekMapper" class="org.planning.io.service.impl.DayOfWeekMapperImpl" />
+    <bean id="domainModelClassMapper" class="org.planning.io.service.impl.DomainModelClassMapperImpl" />
+
+    <bean id="classpathResourceImportFileStrategy" class="org.planning.io.importer.strategy.impl.ClasspathResourceImportFileStrategy" />
+    <bean id="fileSystemImportFileStrategy" class="org.planning.io.importer.strategy.impl.FileSystemImportFileStrategy" />
+
+    <bean id="abstractImporter" class="org.planning.io.importer.AbstractImporter" abstract="true">
+        <property name="classpathResourceImportFileStrategy" ref="classpathResourceImportFileStrategy" />
+        <property name="fileSystemImportFileStrategy" ref="fileSystemImportFileStrategy" />
+    </bean>
+    <bean id="domainImporter" class="org.planning.io.importer.domain.impl.DomainImporterImpl" parent="abstractImporter">
+        <property name="dayOfWeekMapper" ref="dayOfWeekMapper" />
+        <property name="domainModelClassMapper" ref="domainModelClassMapper" />
+    </bean>
+
+    <bean id="importService" class="org.planning.io.service.impl.ImportServiceImpl">
+        <property name="domainImporter" ref="domainImporter" />
+    </bean>
+</beans>

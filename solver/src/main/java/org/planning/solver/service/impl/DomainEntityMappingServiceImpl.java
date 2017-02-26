@@ -1,6 +1,6 @@
 package org.planning.solver.service.impl;
 
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 import org.planning.solver.service.DomainEntityMappingService;
 
 import java.util.HashMap;

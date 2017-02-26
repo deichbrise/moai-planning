@@ -2,7 +2,7 @@ package org.planning.solver.descriptor.domain.impl;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 import org.planning.solver.descriptor.domain.DomainDescriptor;
 import org.planning.solver.model.Domain;
 import org.planning.solver.service.DomainEntityMappingService;
@@ -27,11 +27,11 @@ public class DomainDescriptorImpl implements DomainDescriptor {
 
     @Override
     @Since("1.0.0")
-    public Domain describe(Model model, List<DomainModel> aggregateRootEntities, List<DomainModel> relatedEntities) {
+    public Domain describe(Model model, List<? extends DomainModel> aggregateRootEntities, List<? extends DomainModel> relatedEntities) {
         return initializeVariables(model, aggregateRootEntities, relatedEntities);
     }
 
-    protected Domain initializeVariables(Model model, List<DomainModel> aggregateRootEntities, List<DomainModel> relatedEntities) {
+    protected Domain initializeVariables(Model model, List<? extends DomainModel> aggregateRootEntities, List<? extends DomainModel> relatedEntities) {
         final Map<Class<? extends DomainModel>, List<DomainModel>> relatedEntityIndex = initRelatedEntityIndex(relatedEntities);
         final Domain domain = new Domain();
 
@@ -84,7 +84,7 @@ public class DomainDescriptorImpl implements DomainDescriptor {
         throw new PlanningRuntimeException(builder.toString());
     }
 
-    protected Map<Class<? extends DomainModel>, List<DomainModel>> initRelatedEntityIndex(List<DomainModel> relatedEntities) {
+    protected Map<Class<? extends DomainModel>, List<DomainModel>> initRelatedEntityIndex(List<? extends DomainModel> relatedEntities) {
         final Map<Class<? extends DomainModel>, List<DomainModel>> relatedEntityIndex = new HashMap<>();
         for(DomainModel entity: relatedEntities) {
             if(relatedEntityIndex.containsKey(entity.getClass())) {

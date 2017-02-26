@@ -1,4 +1,4 @@
-package org.planning.persistence.model;
+package org.planning.domain.model;
 
 import java.time.DayOfWeek;
 
@@ -10,7 +10,6 @@ public class Day extends AbstractModel implements DomainModel {
 
     private DayOfWeek day;
 
-    @Override
     public String getName() {
         return day.toString();
     }

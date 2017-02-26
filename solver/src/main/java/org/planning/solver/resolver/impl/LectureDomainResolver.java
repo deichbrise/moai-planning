@@ -2,7 +2,7 @@ package org.planning.solver.resolver.impl;
 
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
-import org.planning.persistence.model.*;
+import org.planning.domain.model.*;
 import org.planning.solver.model.CspSolvingContext;
 import org.planning.solver.model.result.PlannerResult;
 import org.planning.solver.resolver.DomainResolver;

@@ -1,7 +1,7 @@
-package org.planning.persistence.model.constraint;
+package org.planning.domain.model.constraint;
 
-import org.planning.persistence.model.AbstractModel;
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.AbstractModel;
+import org.planning.domain.model.DomainModel;
 
 import java.util.Set;
 

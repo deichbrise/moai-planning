@@ -1,9 +1,11 @@
 package org.planning.controller.impl;
 
 import org.planning.controller.PlanningController;
+import org.planning.controller.printer.PlannerResultPrinter;
+import org.planning.domain.model.Lecture;
 import org.planning.io.model.DomainImportResult;
 import org.planning.io.service.ImportService;
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 import org.planning.solver.Planner;
 import org.planning.solver.model.CspSolvingContext;
 import org.planning.solver.model.result.PlannerResult;
@@ -21,6 +23,7 @@ public class PlanningControllerImpl implements PlanningController {
 
     private Planner planner;
 
+    private PlannerResultPrinter plannerResultPrinter;
 
     @Override
     public void loadDomainAndExecuteSolver(String pathToFile) {
@@ -45,7 +48,9 @@ public class PlanningControllerImpl implements PlanningController {
         solvingContext.setConstraints(domain.getConstraints());
 
         // Execute Planner
-        final PlannerResult result = getPlanner().solve(solvingContext);
+        final PlannerResult<Lecture> result = getPlanner().solve(solvingContext);
+
+        getPlannerResultPrinter().print( result );
     }
 
     public ImportService getImportService() {
@@ -62,5 +67,13 @@ public class PlanningControllerImpl implements PlanningController {
 
     public void setPlanner(Planner planner) {
         this.planner = planner;
+    }
+
+    public PlannerResultPrinter getPlannerResultPrinter() {
+        return plannerResultPrinter;
+    }
+
+    public void setPlannerResultPrinter( final PlannerResultPrinter plannerResultPrinter ) {
+        this.plannerResultPrinter = plannerResultPrinter;
     }
 }

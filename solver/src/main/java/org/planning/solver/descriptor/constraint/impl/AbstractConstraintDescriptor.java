@@ -1,8 +1,8 @@
 package org.planning.solver.descriptor.constraint.impl;
 
 import org.chocosolver.solver.Model;
-import org.planning.persistence.model.DomainModel;
-import org.planning.persistence.model.constraint.Constraint;
+import org.planning.domain.model.DomainModel;
+import org.planning.domain.model.constraint.Constraint;
 import org.planning.solver.descriptor.constraint.ConstraintDescriptor;
 import org.planning.solver.model.CspSolvingContext;
 import org.planning.solver.service.DomainEntityMappingService;

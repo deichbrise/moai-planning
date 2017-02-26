@@ -1,7 +1,7 @@
 package org.planning.solver.descriptor.constraint;
 
 import org.chocosolver.solver.Model;
-import org.planning.persistence.model.constraint.Constraint;
+import org.planning.domain.model.constraint.Constraint;
 import org.planning.solver.model.CspSolvingContext;
 
 /**

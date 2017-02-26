@@ -1,7 +1,6 @@
 package org.planning.solver.model.result;
 
 import org.chocosolver.solver.Solution;
-import org.planning.persistence.model.DomainModel;
 
 import java.util.List;
 

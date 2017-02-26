@@ -1,7 +1,6 @@
 package org.planning.solver.test;
 
 import org.planning.io.test.AbstractIOTest;
-import org.planning.persistence.test.AbstractPersistenceTest;
 
 /**
  * @author pascalstammer

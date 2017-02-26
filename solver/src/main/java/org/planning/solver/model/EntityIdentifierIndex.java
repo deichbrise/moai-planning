@@ -1,6 +1,6 @@
 package org.planning.solver.model;
 
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 
 /**
  * Created by pascalstammer on 23.02.17.

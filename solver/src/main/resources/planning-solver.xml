@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
     <bean id="domainEntityMappingService" class="org.planning.solver.service.impl.DomainEntityMappingServiceImpl" />
 
@@ -13,7 +23,7 @@
     <bean id="limitConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.LimitConstraintDescriptor" parent="abstractConstraintDescriptor" />
     <bean id="uniqueConstraintDescriptor" class="org.planning.solver.descriptor.constraint.impl.UniqueConstraintDescriptor" parent="abstractConstraintDescriptor" />
 
-    <util:list id="constraintDescriptors">
+    <util:list id="constraintDescriptors" value-type="org.planning.solver.descriptor.constraint.ConstraintDescriptor">
         <ref bean="binaryConstraintDescriptor" />
         <ref bean="limitConstraintDescriptor" />
         <ref bean="uniqueConstraintDescriptor" />
@@ -28,5 +38,14 @@
     </bean>
     <bean id="constraintDescriptorFactory" class="org.planning.solver.factory.impl.ConstraintDescriptorFactoryImpl" init-method="init">
         <property name="constraintDescriptors" ref="constraintDescriptors" />
+    </bean>
+
+    <bean id="lectureDomainResolver" class="org.planning.solver.resolver.impl.LectureDomainResolver">
+        <property name="domainEntityMappingService" ref="domainEntityMappingService" />
+    </bean>
+
+    <bean id="planner" class="org.planning.solver.impl.PlannerImpl">
+        <property name="cspModelFactory" ref="cspModelFactory" />
+        <property name="domainResolver" ref="lectureDomainResolver" />
     </bean>
 </beans>

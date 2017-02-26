@@ -1,6 +1,6 @@
 package org.planning.solver.factory.impl;
 
-import org.planning.persistence.model.constraint.Constraint;
+import org.planning.domain.model.constraint.Constraint;
 import org.planning.solver.descriptor.constraint.ConstraintDescriptor;
 import org.planning.solver.factory.ConstraintDescriptorFactory;
 import org.planning.util.annotation.Since;

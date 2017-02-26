@@ -1,7 +1,7 @@
 package org.planning.solver.model;
 
-import org.planning.persistence.model.DomainModel;
-import org.planning.persistence.model.constraint.Constraint;
+import org.planning.domain.model.DomainModel;
+import org.planning.domain.model.constraint.Constraint;
 
 import java.util.List;
 

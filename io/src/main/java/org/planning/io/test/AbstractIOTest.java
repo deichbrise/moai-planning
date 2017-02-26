@@ -1,6 +1,6 @@
 package org.planning.io.test;
 
-import org.planning.persistence.test.AbstractPersistenceTest;
+import org.planning.domain.test.AbstractPersistenceTest;
 
 /**
  * @author pascalstammer

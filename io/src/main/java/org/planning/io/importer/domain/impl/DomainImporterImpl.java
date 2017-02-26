@@ -5,11 +5,11 @@ import org.planning.io.importer.domain.DomainImporter;
 import org.planning.io.model.DomainImportResult;
 import org.planning.io.service.DayOfWeekMapper;
 import org.planning.io.service.DomainModelClassMapper;
-import org.planning.persistence.model.*;
-import org.planning.persistence.model.constraint.BinaryConstraint;
-import org.planning.persistence.model.constraint.Constraint;
-import org.planning.persistence.model.constraint.LimitConstraint;
-import org.planning.persistence.model.constraint.UniqueConstraint;
+import org.planning.domain.model.*;
+import org.planning.domain.model.constraint.BinaryConstraint;
+import org.planning.domain.model.constraint.Constraint;
+import org.planning.domain.model.constraint.LimitConstraint;
+import org.planning.domain.model.constraint.UniqueConstraint;
 import org.planning.util.GuidGenerator;
 import org.planning.util.condition.Conditions;
 import org.planning.util.exception.PlanningRuntimeException;
@@ -121,6 +121,7 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
                 final TimeSlot timeSlot = new TimeSlot();
                 final Time from = Time.valueOf(element.getAttribute("from"));
                 final Time to = Time.valueOf(element.getAttribute("to"));
+                timeSlot.setName( element.getAttribute( "name" ) );
                 timeSlot.setGuid(GuidGenerator.generateGuid());
                 timeSlot.setInterval(from, to);
                 result.add(timeSlot);
@@ -196,7 +197,7 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
                 for(final String name : relations) {
                     final DomainModel relation = findByName(name, domainImportResult);
                     if(relation == null) {
-                        throw new PlanningRuntimeException("No domain model found for name " + rootName);
+                        throw new PlanningRuntimeException("No domain model found for name " + name);
                     }
                     if(lastClass == null) {
                         lastClass = relation.getClass();
@@ -216,7 +217,7 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
     }
 
     protected List<LimitConstraint> parseLimitConstraint(final Document document, final DomainImportResult domainImportResult) {
-        final NodeList nodes = document.getElementsByTagName(Nodes.BINARY_CONSTRAINT);
+        final NodeList nodes = document.getElementsByTagName(Nodes.LIMIT_CONSTRAINT);
         final List<LimitConstraint> result = new ArrayList<>();
         for(int i = 0; i < nodes.getLength(); i++) {
             final Node node = nodes.item(i);
@@ -224,13 +225,13 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
                 final Element element = (Element)node;
 
                 final String name = element.getAttribute("of");
-                final DomainModel root = findByName(name, domainImportResult);
+                final Class<? extends DomainModel> root = getDomainModelClassMapper().map( name );
                 if(root == null) {
                     throw new PlanningRuntimeException("No domain model found for name " + name);
                 }
                 final Integer limit = Integer.valueOf(element.getAttribute("to"));
 
-                result.add(new LimitConstraint(root.getClass(), limit));
+                result.add(new LimitConstraint(root, limit));
             }
         }
         return result;
@@ -268,31 +269,31 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
 
     protected DomainModel findByName(final String name, final DomainImportResult domainImportResult) {
         for(final Lecture lecture : domainImportResult.getLectures()) {
-            if(lecture.getName().equals(name)) {
+            if(lecture.getName().equalsIgnoreCase(name)) {
                 return lecture;
             }
         }
 
         for(final Day day : domainImportResult.getDays()) {
-            if(day.getName().equals(name)) {
+            if(day.getName().equalsIgnoreCase(name)) {
                 return day;
             }
         }
 
         for(final Instructor instructor : domainImportResult.getInstructors()) {
-            if(instructor.getName().equals(name)) {
+            if(instructor.getName().equalsIgnoreCase(name)) {
                 return instructor;
             }
         }
 
         for(final Room room : domainImportResult.getRooms()) {
-            if(room.getName().equals(name)) {
+            if(room.getName().equalsIgnoreCase(name)) {
                 return room;
             }
         }
 
         for(final TimeSlot timeSlot : domainImportResult.getTimeSlots()) {
-            if(timeSlot.getName().equals(name)) {
+            if(timeSlot.getName().equalsIgnoreCase(name)) {
                 return timeSlot;
             }
         }
@@ -319,10 +320,10 @@ public class DomainImporterImpl extends AbstractImporter<DomainImportResult> imp
     public interface Nodes {
         public static final String LECTURE = "lecture";
         public static final String DAY = "day";
-        public static final String TIME_SLOT = "timeSlot";
+        public static final String TIME_SLOT = "time-slot";
         public static final String INSTRUCTOR = "instructor";
         public static final String ROOM = "room";
-        public static final String BINARY_CONSTRAINT = "reduceTo";
+        public static final String BINARY_CONSTRAINT = "reduce-to";
         public static final String UNIQUE_CONSTRAINT = "unique";
         public static final String LIMIT_CONSTRAINT = "limit";
     }

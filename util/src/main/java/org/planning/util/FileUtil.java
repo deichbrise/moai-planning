@@ -12,6 +12,6 @@ public class FileUtil {
         if(!Conditions.isClasspathResource(path)) {
             throw new PlanningRuntimeException("File path is not a classpath file resource");
         }
-        return path.replace("classpath:", "");
+        return path.replace("classpath:/", "");
     }
 }

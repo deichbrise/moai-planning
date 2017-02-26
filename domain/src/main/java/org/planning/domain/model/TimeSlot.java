@@ -1,4 +1,4 @@
-package org.planning.persistence.model;
+package org.planning.domain.model;
 
 import java.sql.Time;
 
@@ -12,10 +12,7 @@ public class TimeSlot extends AbstractModel implements DomainModel {
 
     private Time end;
 
-    @Override
-    public String getName() {
-        return start.toString() + "-" + end.toString();
-    }
+    private String name;
 
     public void setInterval(final Time start, final Time end) {
         this.start = start;
@@ -36,5 +33,13 @@ public class TimeSlot extends AbstractModel implements DomainModel {
 
     public void setEnd( final Time end ) {
         this.end = end;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName( final String name ) {
+        this.name = name;
     }
 }

@@ -1,7 +1,7 @@
 package org.planning.io.service.impl;
 
 import org.planning.io.service.DomainModelClassMapper;
-import org.planning.persistence.model.*;
+import org.planning.domain.model.*;
 
 import java.util.HashMap;
 import java.util.Map;

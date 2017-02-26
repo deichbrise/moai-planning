@@ -1,4 +1,4 @@
-package org.planning.persistence.model;
+package org.planning.domain.model;
 
 /**
  * @author pascalstammer
@@ -6,5 +6,4 @@ package org.planning.persistence.model;
  */
 public interface DomainModel {
     String getGuid();
-    String getName();
 }

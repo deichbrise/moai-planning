@@ -2,12 +2,11 @@ package org.planning.solver.descriptor.constraint.impl;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
-import org.planning.persistence.model.DomainModel;
-import org.planning.persistence.model.constraint.Constraint;
-import org.planning.persistence.model.constraint.LimitConstraint;
+import org.planning.domain.model.DomainModel;
+import org.planning.domain.model.constraint.Constraint;
+import org.planning.domain.model.constraint.LimitConstraint;
 import org.planning.solver.descriptor.constraint.ConstraintDescriptor;
 import org.planning.solver.model.CspSolvingContext;
-import org.planning.util.BeanUtil;
 import org.planning.util.condition.Conditions;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class LimitConstraintDescriptor extends AbstractConstraintDescriptor impl
         for(final DomainModel aggregateRootEntitiy : context.getAggregateRootEntities()) {
             allModelConstraints.add(context.getDomain().get(aggregateRootEntitiy.getGuid(), limitConstraint.getModelClass()));
         }
-        final IntVar[] allModellVars = (IntVar[]) allModelConstraints.toArray();
+        final IntVar[] allModellVars = allModelConstraints.toArray(new IntVar[]{});
 
         // Specify the count domain
         IntVar limit = model.intVar(limitConstraint.getModelClass().getSimpleName() + "_limit", 0, limitConstraint.getLimit());

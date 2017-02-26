@@ -1,6 +1,6 @@
 package org.planning.io.service;
 
-import org.planning.persistence.model.DomainModel;
+import org.planning.domain.model.DomainModel;
 
 /**
  * @author pascalstammer

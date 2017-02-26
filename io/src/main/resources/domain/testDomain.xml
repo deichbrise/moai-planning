@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<domain>
+    <lecture name="Lecture 1" />
+    <lecture name="Lecture 2" />
+    <lecture name="Lecture 3" />
+    <lecture name="Lecture 4" />
+
+    <room name="Room 1" />
+    <room name="Room 2" />
+    <room name="Room 3" />
+    <room name="Room 4" />
+
+    <time-slot name="8-10" from="08:00:00" to="10:00:00" />
+    <time-slot name="10-12" from="10:00:00" to="12:00:00" />
+    <time-slot name="12-14" from="12:00:00" to="14:00:00" />
+
+    <instructor name="Instructor 1" />
+    <instructor name="Instructor 2" />
+    <instructor name="Instructor 3" />
+
+    <day name="Monday" />
+    <day name="Tuesday" />
+    <day name="Wednesday" />
+    <day name="Thursday" />
+    <day name="Friday" />
+
+    <reduce-to of="Lecture 1" to="Room 1, Room 2" />
+
+    <limit of="Instructor" to="2" />
+
+    <unique of="Lecture" by="Room, TimeSlot, Instructor" />
+</domain>

@@ -1,4 +1,4 @@
-package org.planning.persistence.model.constraint;
+package org.planning.domain.model.constraint;
 
 /**
  * @author pascalstammer
