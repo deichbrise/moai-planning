@@ -9,24 +9,24 @@ import java.util.List;
  * Created by pascalstammer on 23.02.17.
  */
 public class CspSolvingContext {
-    private List<DomainModel> aggregateRootEntities;
-    private List<DomainModel> relatedEntities;
+    private List<? extends DomainModel> aggregateRootEntities;
+    private List<? extends DomainModel> relatedEntities;
     private Domain domain;
     private List<Constraint> constraints;
 
-    public List<DomainModel> getAggregateRootEntities() {
+    public List<? extends DomainModel> getAggregateRootEntities() {
         return aggregateRootEntities;
     }
 
-    public void setAggregateRootEntities(List<DomainModel> aggregateRootEntities) {
+    public void setAggregateRootEntities(List<? extends DomainModel> aggregateRootEntities) {
         this.aggregateRootEntities = aggregateRootEntities;
     }
 
-    public List<DomainModel> getRelatedEntities() {
+    public List<? extends DomainModel> getRelatedEntities() {
         return relatedEntities;
     }
 
-    public void setRelatedEntities(List<DomainModel> relatedEntities) {
+    public void setRelatedEntities(List<? extends DomainModel> relatedEntities) {
         this.relatedEntities = relatedEntities;
     }
 

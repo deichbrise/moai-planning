@@ -15,12 +15,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>persistence</module>
+        <module>domain</module>
         <module>solver</module>
         <module>rest</module>
         <module>util</module>
         <module>io</module>
         <module>shell</module>
+        <module>controller</module>
     </modules>
 
     <packaging>pom</packaging>

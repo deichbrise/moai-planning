@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.planning</groupId>
-            <artifactId>io</artifactId>
+            <artifactId>controller</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

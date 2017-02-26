@@ -15,4 +15,8 @@ public class Conditions {
     public static boolean isOfSameClass(final Class<?> class1, final Class<?> class2) {
         return class1.equals(class2);
     }
+
+    public static boolean isClasspathResource(final String file) {
+        return file.startsWith("classpath:");
+    }
 }

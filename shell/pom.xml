@@ -17,6 +17,11 @@
             <artifactId>spring-shell</artifactId>
             <version>${spring.shell.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <repositories>

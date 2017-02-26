@@ -9,21 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>solver</artifactId>
-    <name>Planning Core Solver</name>
+    <artifactId>domain</artifactId>
+    <name>Planning HIBERCAL</name>
 
     <dependencies>
         <dependency>
             <groupId>${parent.groupId}</groupId>
-            <artifactId>io</artifactId>
+            <artifactId>util</artifactId>
             <version>${parent.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.choco-solver</groupId>
-            <artifactId>choco-solver</artifactId>
-            <version>${choco.version}</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>${spring.data.db}</artifactId>
+            <version>${spring.data.version}</version>
         </dependency>
-
     </dependencies>
 </project>
