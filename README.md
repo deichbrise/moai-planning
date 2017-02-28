@@ -11,6 +11,11 @@ user interface. (not implemented yet)
 
 Christopher Broecker (chbroecker), Franziska Becker (frabecker), Pascal Stammer (pstammer)
 
+# Algorithm
+Entry Point is org.planning.shell.controller.command.impl.SolverCommandsImpl. Here we call org.planning.controller.impl.PlanningControllerImpl and parse the given XML-File .. Then we build the CspSolvingContext and execute the PlanningAlgorithm in org.planning.solver.impl.PlannerImpl. Here we use a the CspModelFactory to construct the model and use the ChocoSolver to solve the CSP. In the CspModelFactory we use a DomainDescriptor and for each constraint type a specific ConstraintDescriptor. Thats all. This approach provide the possibility to easily define your own constraint types and manage your domain easily by xml files which are better readable than Java-Code.
+
+For XML File Structure see: examples/example1.xml
+
 ## Project Structure
 
 ### IO
