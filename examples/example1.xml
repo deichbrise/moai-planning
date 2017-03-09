@@ -102,5 +102,6 @@
 
     <limit of="Instructor" to="5" />
 
-    <unique of="Lecture" by="Day, Room, TimeSlot, Instructor" />
+    <unique of="Lecture" by="Day, TimeSlot, Instructor" />
+    <unique of="Lecture" by="Day, Room, TimeSlot" />
 </domain>
